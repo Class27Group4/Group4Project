@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "devOps is simple but require hard work"
+echo "i will soon be rich"
+echo "2022 i am a senior DevOps and cloud Engineer"
+echo this message is for:
+whoami
+date
