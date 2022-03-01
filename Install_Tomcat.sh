@@ -20,8 +20,8 @@ sudo ln -s /opt/tomcat9/bin/shutdown.sh /usr/bin/stoptomcat
 # 	1. File /opt/tomcat9/conf/tomcat-users.xml: Add user and role info (add before </tomcat-users>)
 # 	2. File /opt/tomcat9/conf/server.xml (line 69): Change default port 8080 to something else (optional)
 # 	3. File /opt/tomcat9/webapps/manager/META-INF/context.xml (line 22-23): Comment out lines that allow local access only to
-#		back-end (optional - only necessary if ypu want to access back-end from online)
+#		back-end (optional - only necessary if you want to access back-end from online)
 # 	4. Add cron job for Tomcat to start automatically at server startup
 # 	5. Setup access between Maven and Tomcat servers either via ssh or password authentication. Copy web app from Maven server to
-#		Tomcat server (This is a manual operation; Maven should be able to do this automatically if setup)
+#		Tomcat server using scp (This is a manual operation; Maven should be able to do this automatically if setup)
 # 	6. Start Tomcat application
