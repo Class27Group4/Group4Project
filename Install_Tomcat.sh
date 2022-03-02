@@ -25,3 +25,4 @@ sudo rm "/opt/apache-tomcat-9.0.59.tar.gz" # Remove the archive from the server.
 #	5. Setup access between Maven and Tomcat servers either via ssh or password authentication. Copy the web app from Maven server to
 #	   Tomcat server using scp (This is a manual operation; Maven should be able to do this automatically if setup to do so. We did not go over this in class.)
 #	6. Start the Tomcat application (Type starttomcat)
+#
