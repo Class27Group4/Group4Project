@@ -4,7 +4,7 @@
 # Logout and back in after running the script for the user's group addition to take effect.
 
 sudo dnf -y upgrade # Upgrade the server first. If it is not desired to upgrade the server, comment out this line.
-sudo dnf -y install "wget tree unzip vim java-11-openjdk-devel" # Install prerequisite/useful packages.
+sudo dnf -y install wget tree unzip vim java-11-openjdk-devel # Install prerequisite/useful packages.
 sudo wget -O "/opt/apache-tomcat-9.0.59.tar.gz" "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.59/bin/apache-tomcat-9.0.59.tar.gz" # Download Tomcat from web and save to the specified path.
 sudo tar -xvf "/opt/apache-tomcat-9.0.59.tar.gz" -C "/opt/" # Extract Tomcat archive.
 sudo mv "/opt/apache-tomcat-9.0.59" "/opt/tomcat9" # Rename the extracted Tomcat directory.
