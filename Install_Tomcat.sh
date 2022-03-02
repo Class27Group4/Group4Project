@@ -3,27 +3,26 @@
 # Execute this script as the user you wish to configure for Tomcat; the user should have sudo rights.
 # Logout and back in after running the script for the user's group addition to take effect.
 
-sudo dnf upgrade #If it is not desired to upgrade the server, comment out this line.
-sudo dnf install wget tree unzip vim java-11-openjdk-devel
-sudo wget -O /opt/apache-tomcat-9.0.59.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.59/bin/apache-tomcat-9.0.59.tar.gz
-sudo tar -xvf /opt/apache-tomcat-9.0.59.tar.gz
-sudo mv /opt/apache-tomcat-9.0.59 /opt/tomcat10
-sudo groupadd tomcat
-sudo usermod -a -G tomcat `whoami`
-sudo chown -R root:tomcat /opt/tomcat10
-# create soft links to start/stop tomcat. Type "starttomcat" or "stoptomcat" from anywhere to start or stop tomcat respectively.
-sudo ln -s /opt/tomcat9/bin/startup.sh /usr/bin/starttomcat
-sudo ln -s /opt/tomcat9/bin/shutdown.sh /usr/bin/stoptomcat
-sudo rm /opt/apache-tomcat-9.0.59.tar.gz
+sudo dnf upgrade # Upgrade the server first. If it is not desired to upgrade the server, comment out this line.
+sudo dnf install wget tree unzip vim java-11-openjdk-devel # Install prerequisite/useful packages.
+sudo wget -O /opt/apache-tomcat-9.0.59.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.59/bin/apache-tomcat-9.0.59.tar.gz # Download Tomcat from web and save to the specified path.
+sudo tar -xvf /opt/apache-tomcat-9.0.59.tar.gz # Extract Tomcat archive.
+sudo mv /opt/apache-tomcat-9.0.59 /opt/tomcat9 # Rename the extracted Tomcat directory.
+sudo groupadd tomcat # Add a group for Tomcat users.
+sudo usermod -a -G tomcat `whoami` # Assign the user executing this script to the "tomcat" group.
+sudo chown -R root:tomcat /opt/tomcat9 # Change the group ownership of the tomcat directory to "tomcat" group so that only members of this group will have access to this directory.
+sudo chmod -R g+s /opt/tomcat9 # Set special permissions to this directory and sub-directories such that any file created in this directory and deeper inherit the group's permissions.
+sudo ln -s /opt/tomcat9/bin/startup.sh /usr/bin/starttomcat # create a soft link to start Tomcat from anywhere; Type "sudo starttomcat" to start the application. I tried just "starttomcat" but ran into some errors. I haven't figured out yet why I can't run without using sudo; it should be possible.
+sudo ln -s /opt/tomcat9/bin/shutdown.sh /usr/bin/stoptomcat # create a soft link to stop Tomcat from anywhere; Type "stoptomcat" to stop the application.
+sudo rm /opt/apache-tomcat-9.0.59.tar.gz # Remove the archive from the server.
 
 # The following config. can be added to this script for automatic setup or should be configured manually:
 #       1. File /opt/tomcat9/conf/tomcat-users.xml: Add user and role info (add before </tomcat-users>)
 #       2. File /opt/tomcat9/conf/server.xml (line 69): Change default port 8080 to something else (optional)
 #       3. File /opt/tomcat9/webapps/manager/META-INF/context.xml (line 22-23): Comment out lines that allow local access only to
-#               back-end (optional - only necessary if ypu want to access back-end from online)
-#       4. Add cron job for Tomcat to start automatically at server startup
-#       5. Setup access between Maven and Tomcat servers either via ssh or password authentication. Copy web app from Maven server to
-#               Tomcat server (This is a manual operation; Maven should be able to do this automatically if setup)
-#       6. Start Tomcat application
-
+#               back-end (optional - only necessary if you want to access back-end from online)
+#       4. Add cron job for Tomcat to start automatically at server startup (optional)
+#       5. Setup access between Maven and Tomcat servers either via ssh or password authentication. Copy the web app from Maven server to
+#               Tomcat server using scp (This is a manual operation; Maven should be able to do this automatically if setup to do so)
+#       6. Start the Tomcat application (Type sudo starttomcat)
 
