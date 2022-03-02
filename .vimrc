@@ -1,4 +1,4 @@
-# Vim configuration file. Add to your home directory (~).
+" Vim configuration file. Add to your home directory.
 
 " Don't try to be vi compatible
 set nocompatible
